@@ -62,7 +62,7 @@ def convert_to_md(filename)
   # create a new md file
   FileUtils.touch("#{md_file}")
 
-  output = WordToMarkdown.new("#{@source_directory}/#{@dashed_filename}.doc")
+  output = WordToMarkdown.new("#{@source_directory}/markdown/#{@dashed_filename}.doc")
 
   open(md_file, 'w') { |f|
     f.puts output
