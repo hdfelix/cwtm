@@ -1,5 +1,6 @@
 require 'pry'
 require 'awesome_print'
+require 'word-to-markdown'
 
 # methods
 
@@ -11,7 +12,7 @@ def cleanup_filename(filename)
     if filename.include?(' ')
       bad_filename = @source_directory + '/' + filename + '.doc'
       good_filename = @source_directory + '/' + dash_filename(filename) + '.doc'
-      FileUtils.mv bad_filename, good_filename 
+      FileUtils.mv bad_filename, good_filename.downcase
     end
 end
 
@@ -52,12 +53,17 @@ end
 def convert_to_md(filename)
   @dashed_filename = dash_filename(filename) 
   
-  md_file = dashed_filename + '.md'
+  md_file = @dashed_filename + '.md'
 
+  # remove the target md file if it exists
+  FileUtils.rm("#{md_file}")
+  
+  # create a new md file
   FileUtils.touch("#{md_file}")
-  tmp = "w2m #{@source_directory}/#{dashed_filename}.doc"
+  #tmp = "w2m #{@source_directory}/#{@dashed_filename}.doc >> #{md_file}"
+  output = WordToMarkdown.new("#{@source_directory}/#{@dashed_filename}.doc}")
   binding.pry 
-  output = %x(tmp)
+  output = %x("#{tmp}")
   puts output
 end
 
@@ -76,7 +82,7 @@ files.each do |f|
   cleanup_filename(f)
 
   # Test md transform on one file
-  if f.downcase == "02 mystical"
+  if f.downcase == "02-mystical"
 
     # convert file doc file to md
     convert_to_md(f)
