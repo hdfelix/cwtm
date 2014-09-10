@@ -56,15 +56,19 @@ def convert_to_md(filename)
   md_file = @dashed_filename + '.md'
 
   # remove the target md file if it exists
-  FileUtils.rm("#{md_file}")
+  #FileUtils.rm("#{md_file}")
   
   # create a new md file
   FileUtils.touch("#{md_file}")
-  #tmp = "w2m #{@source_directory}/#{@dashed_filename}.doc >> #{md_file}"
-  output = WordToMarkdown.new("#{@source_directory}/#{@dashed_filename}.doc}")
-  binding.pry 
-  output = %x("#{tmp}")
+
+  output = WordToMarkdown.new("#{@source_directory}/#{@dashed_filename}.doc")
+
+  open(md_file, 'w') { |f|
+    f.puts output
+  }
+  binding.pry
   puts output
+
 end
 
 # Main logic
@@ -77,7 +81,7 @@ puts "\ncurrent directory: #{Dir.pwd}\n"
 
 # Iterate over all files and directories in the current directory
 files.each do |f|
-
+  binding.pry
   # remove white spaces from filenames if necessary
   cleanup_filename(f)
 
