@@ -67,7 +67,6 @@ def convert_to_md(filename)
   open(md_file, 'w') { |f|
     f.puts output
   }
-  binding.pry
   puts output
 
 end

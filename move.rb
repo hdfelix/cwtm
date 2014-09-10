@@ -32,7 +32,6 @@ files = directory_filenames
 # Loop through files array
 files.each do |f|
   puts "  #{File.basename(f)}"
-  binding.pry
   FileUtils.cp f, target
 end
 
