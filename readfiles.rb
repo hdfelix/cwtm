@@ -40,11 +40,12 @@ def get_and_set_source_directories
   puts "Current directory: #{@project_directory}"
 
   # ask for desired directory to work with
-  puts "which directory to work with? "
-  @source_directory = gets.strip.chomp
-  puts "Opening #{@source_directory}\n\n"
+  # puts "which directory to work with? "
+  # @source_directory = gets.strip.chomp
+  # puts "Opening #{@source_directory}\n\n"
 
   # change to desired directory
+  @source_directory = '/Users/Hector/Desktop/84PreciousWords'
   Dir.chdir(@source_directory)
   puts "Current directory: " 
   puts Dir.pwd
